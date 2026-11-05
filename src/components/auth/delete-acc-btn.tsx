@@ -94,16 +94,16 @@ export function DeleteAccBtn({
 
       clearUser();
 
-      // Clear local supabase client session - need this because the local session might not know about user is deleted from server
+      // Clear supabase client session
       const { createClient } = await import("@/lib/supabase/client");
       const supabase = createClient();
 
-      await supabase.auth.signOut({ scope: "local" });
+      await supabase.auth.signOut();
 
       toast.add({
         type: "success",
         title: "Account deleted",
-        description: "Your PlotQ account has been deleted.",
+        description: "Your PlotQ account data has been deleted.",
       });
 
       router.replace("/");
@@ -158,7 +158,7 @@ export function DeleteAccBtn({
             className={cn(
               "flex-1 m-0 relative overflow-hidden",
               countdown > 0 &&
-                "bg-destructive/10 dark:bg-destructive/15 text-destructive disabled:opacity-100",
+              "bg-destructive/10 dark:bg-destructive/15 text-destructive disabled:opacity-100",
             )}
           >
             {countdown > 0 && (

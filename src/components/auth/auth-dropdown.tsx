@@ -38,44 +38,44 @@ export function AuthDropdown() {
           render={
             <Button
               variant="outline"
-              className="flex gap-2 h-12 px-3 rounded-lg select-none"
+              className="flex gap-2 h-11 px-3 rounded-sm select-none"
             >
               <Image
                 src={user?.avatarUrl || "/default_user.png"}
                 alt="User Image"
-                height={26}
-                width={26}
+                height={25}
+                width={25}
                 className="rounded-full"
               />
 
-              <p className="text-[16px]">{user?.name}</p>
+              <p className="text-[15px]">{user?.name}</p>
             </Button>
           }
         />
 
-        <DropdownMenuContent className="w-44" align="end">
+        <DropdownMenuContent className="w-44 rounded-sm" align="end">
           <DropdownMenuGroup>
             <DropdownMenuLabel>Appearance</DropdownMenuLabel>
 
             <DropdownMenuSub>
               <DropdownMenuSubTrigger>Theme</DropdownMenuSubTrigger>
 
-              <DropdownMenuSubContent>
+              <DropdownMenuSubContent className="rounded-sm">
                 <DropdownMenuRadioGroup
                   value={theme ?? "system"}
                   onValueChange={(value) => {
                     setTheme(value as "system" | "light" | "dark");
                   }}
                 >
-                  <DropdownMenuRadioItem value="system">
+                  <DropdownMenuRadioItem value="system" className="rounded-sm">
                     System
                   </DropdownMenuRadioItem>
 
-                  <DropdownMenuRadioItem value="light">
+                  <DropdownMenuRadioItem value="light" className="rounded-sm">
                     Light
                   </DropdownMenuRadioItem>
 
-                  <DropdownMenuRadioItem value="dark">
+                  <DropdownMenuRadioItem value="dark" className="rounded-sm">
                     Dark
                   </DropdownMenuRadioItem>
                 </DropdownMenuRadioGroup>

@@ -1,6 +1,5 @@
 "use server";
 
-import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { db } from "@/prisma/db";
 import { revalidatePath } from "next/cache";
@@ -50,23 +49,8 @@ export async function deleteAccount() {
     };
   }
 
-  // 3. Delete the Supabase Auth user.
-  const admin = createAdminClient();
-
-  const { error: deleteError } = await admin.auth.admin.deleteUser(user.id);
-
-  if (deleteError) {
-    console.error(
-      "[Account deletion] Failed to delete Auth user:",
-      deleteError,
-    );
-
-    return {
-      success: false,
-      error:
-        "Your collection was deleted, but your account couldn't be deleted. Please try again.",
-    };
-  }
+  // 3. Sign out the user on the server.
+  await supabase.auth.signOut();
 
   // 4. Revalidate and return success.
   revalidatePath("/", "layout");
