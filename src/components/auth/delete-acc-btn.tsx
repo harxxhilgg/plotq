@@ -15,7 +15,7 @@ import {
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
 import { Button } from "../ui/button";
-import { DeleteIcon } from "lucide-react";
+import { DeleteIcon, Info } from "lucide-react";
 import { Spinner } from "../ui/spinner";
 import { deleteAccount } from "@/actions/account";
 import { cn } from "cn";
@@ -141,7 +141,17 @@ export function DeleteAccBtn({
           <AlertDialogTitle>Delete Account?</AlertDialogTitle>
 
           <AlertDialogDescription>
-            Are you sure you want to delete account?
+            <div className="flex flex-col gap-2">
+              <div>Are you sure you want to delete account?</div>
+
+              <Info className="size-4 mt-4" />
+
+              <p>
+                By continuing, all of your account data will be permanently
+                deleted from server.
+              </p>
+              <p>This action cannot be undone.</p>
+            </div>
           </AlertDialogDescription>
         </AlertDialogHeader>
 
@@ -158,7 +168,7 @@ export function DeleteAccBtn({
             className={cn(
               "flex-1 m-0 relative overflow-hidden",
               countdown > 0 &&
-              "bg-destructive/10 dark:bg-destructive/15 text-destructive disabled:opacity-100",
+                "bg-destructive/10 dark:bg-destructive/15 text-destructive disabled:opacity-100",
             )}
           >
             {countdown > 0 && (

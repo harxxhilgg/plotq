@@ -3,11 +3,12 @@
 import { useTmdbSearch } from "@/hooks/use-tmdb-search";
 import { useEffect, useRef, useState } from "react";
 import { Input } from "../ui/input";
+import { Field } from "../ui/field";
 import { getTmdbImageUrl } from "@/lib/tmdb/image";
 import Image from "next/image";
 import { Spinner } from "../ui/spinner";
 import { Button } from "../ui/button";
-import { Check, Plus } from "lucide-react";
+import { Check, Plus, X } from "lucide-react";
 import { addMediaToWatchlist, getCurrentUserMediaIds } from "@/actions/media";
 import { toast } from "../ui/toast";
 import { useRouter } from "next/navigation";
@@ -117,6 +118,11 @@ export function MediaSearch() {
     }
   }
 
+  function handleClear() {
+    setQuery("");
+    setIsOpen(false);
+  }
+
   return (
     <>
       {/* Background dimmer */}
@@ -131,17 +137,30 @@ export function MediaSearch() {
       )}
 
       <div ref={searchRef} className="relative z-50 w-full max-w-3xl">
-        <Input
-          value={query}
-          autoComplete="off"
-          onChange={(event) => {
-            setQuery(event.target.value);
-            setIsOpen(true);
-          }}
-          onFocus={() => setIsOpen(true)}
-          placeholder="Search movie, TV show or anime..."
-          className="relative z-50 h-auto rounded-none border-x-0 border-t-0 border-b-2 border-b-muted-foreground/50 bg-transparent! px-1 py-2 text-3xl! font-light shadow-none placeholder:text-muted-foreground focus-visible:border-b-orange-500 focus-visible:ring-0 focus-visible:ring-offset-0 font-monst"
-        />
+        <Field className="relative w-full">
+          <Input
+            value={query}
+            autoComplete="off"
+            onChange={(event) => {
+              setQuery(event.target.value);
+              setIsOpen(true);
+            }}
+            onFocus={() => setIsOpen(true)}
+            placeholder="Search movie, TV show or anime..."
+            className="relative z-50 h-auto rounded-none border-x-0 border-t-0 border-b-2 border-b-muted-foreground/50 bg-transparent! px-1 py-2 pr-12 text-3xl! font-light shadow-none placeholder:text-muted-foreground focus-visible:border-b-orange-500 focus-visible:ring-0 focus-visible:ring-offset-0 font-monst"
+          />
+
+          {query && (
+            <Button
+              type="button"
+              variant="ghost"
+              onClick={handleClear}
+              className="absolute right-0 top-1/2 z-50 -translate-y-1/2 w-auto! hover:bg-transparent! hover:text-orange-500"
+            >
+              <X className="size-6" strokeWidth={1} />
+            </Button>
+          )}
+        </Field>
 
         {error && <p className="mt-4 text-sm text-destructive">{error}</p>}
 

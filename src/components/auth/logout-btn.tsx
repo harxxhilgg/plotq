@@ -18,7 +18,7 @@ import {
 } from "../ui/alert-dialog";
 import { Button } from "../ui/button";
 import { Spinner } from "../ui/spinner";
-import { LogOutIcon } from "lucide-react";
+import { Info, LogOutIcon } from "lucide-react";
 
 export interface LogoutBtnProps {
   open?: boolean;
@@ -95,7 +95,16 @@ export function LogoutBtn({
           <AlertDialogTitle>Logout?</AlertDialogTitle>
 
           <AlertDialogDescription>
-            Are you sure you want to logout?
+            <div className="flex flex-col gap-2">
+              <div>Are you sure you want to logout?</div>
+
+              <Info className="size-4 mt-4" />
+
+              <p>
+                By continuing, you will be logged out and will need to login
+                again to keep using your account.
+              </p>
+            </div>
           </AlertDialogDescription>
         </AlertDialogHeader>
 

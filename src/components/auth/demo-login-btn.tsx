@@ -36,7 +36,7 @@ export function DemoLoginBtn() {
               Sorry! There is no demo. 😿
             </AlertDialogTitle>
 
-            <AlertDialogDescription>
+            <AlertDialogDescription className={"mt-2"}>
               If you really want to try PlotQ, just sign in with Google.
               It&apos;s secure, quick, and that&apos;s it.
             </AlertDialogDescription>
